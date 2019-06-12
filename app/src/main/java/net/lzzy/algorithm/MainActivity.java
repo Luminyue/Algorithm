@@ -58,10 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int temp;
         for (i= 0;i<items.length-1;i++){
             for(j=0;j<items.length-1;j++){
-                if (items[j]>items[j+1]){
-                    temp=items[j];
-                    items[j]=items[j+1];
-                    items[j+1]=temp;
+                if (items[j]>items[j+1]) {
+                    temp = items[j];
+                    items[j] = items[j + 1];
+                    items[j + 1] = temp;
                 }
             }
         }
