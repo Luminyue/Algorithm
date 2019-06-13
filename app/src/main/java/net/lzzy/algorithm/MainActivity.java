@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Integer[] items;
     private EditText edtItems;
     private TextView tvResult;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayItems(edtItems);
                 break;
             case R.id.activity_main_btn_sort:
-//                directSort();
-                insertSort();
+              directSort();
                 displayItems(tvResult);
                 break;
             default:
@@ -58,31 +56,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //todo:直接选择排序的具体实现
         //选择排序
 
-        for (int i = 0; i < items.length - 1; i++) {
-            int minPos = i;
-            for (int j = i + 1; j < items.length; j++) {
-                if (items[minPos].compareTo(items[j]) > 0) {
-                    minPos = j;
+        //       for (int i = 0; i < items.length - 1; i++) {
+//            int minPos = i;
+//            for (int j = i + 1; j < items.length; j++) {
+//                if (items[minPos].compareTo(items[j]) > 0) {
+//                    minPos = j;
+//                }
+//            }
+//            swap(minPos, i);
+//        }
+//    }
+//
+//    private void insertSort () {
+//        for (int i = 1; i < items.length; i++) {
+//            if (items[i] < items[i - 1]) {
+//                int temp = items[i];
+//                int k = i - 1;
+//                for (int j = k; j >= 0 && temp < items[j]; i--) {
+//                    items[j + i] = items[j];
+//                    k--;
+//                }
+//                items[k + 1] = temp;
+//            }
+
+
+        //分为有序区和无序区，每一趟排序都在无序区依次对比，记录对比区域的最小元素的位置
+        //然后把无序区第一个元素和记录的最小元素进行交换，无序区少一个，有序区多一个，循环往复直至**
+        for (int i=0;i<items.length-1;i++){
+            int minPos=i;
+            for (int j=i+1;j<items.length;j++){
+                if (items[minPos].compareTo(items[j])>0){
+                    minPos=j;
                 }
             }
-            swap(minPos, i);
+            swap(minPos,i);
         }
     }
-
-    private void insertSort () {
-        for (int i = 1; i < items.length; i++) {
-            if (items[i] < items[i - 1]) {
-                int temp = items[i];
-                int k = i - 1;
-                for (int j = k; j >= 0 && temp < items[j]; i--) {
-                    items[j + i] = items[j];
-                    k--;
-                }
-                items[k + 1] = temp;
+    private void insertSort(){
+        for (int i=1;i<items.length;i++){
+            int j=i-1;
+            if (items[j].compareTo(items[i])<0){
+                continue;
             }
+            Integer tmp=items[i];
+            while (j>=0 && items[j].compareTo(tmp)>0){
+                items[j+1]=items[j];
+                j--;
+            }
+            items[j+1]=tmp;
         }
     }
-
     private void swap(int m, int n) {
         int tmp = items[m];
         items[m] = items[n];
