@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //分为有序区和无序区，每一趟排序都在无序区依次对比，记录对比区域的最小元素的位置
         //然后把无序区第一个元素和记录的最小元素进行交换，无序区少一个，有序区多一个，循环往复直至**
-        //元素数量为零
+        //元素数量为0
         for (int i=0;i<items.length-1;i++){
             int minPos=i;
             for (int j=i+1;j<items.length;j++){
