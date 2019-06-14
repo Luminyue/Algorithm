@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Integer[] items;
     private EditText edtItems;
     private TextView tvResult;
-    int i,j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void directSort() {
         //todo:直接选择排序的具体实现
-        int temp;
-        for (i= 0;i<items.length-1;i++){
-            for(j=0;j<items.length-1;j++){
-                if (items[j]>items[j+1]) {
-                    temp = items[j];
-                    items[j] = items[j + 1];
-                    items[j + 1] = temp;
-                }
-            }
-        }
+       
+      for (int i = 0;i<items.length-1;i++){
+          int minPos=i;
+          for (int j=i+1;j<items.length;j++){
+              if (items[minPos].compareTo(items[j])>0){
+                  minPos=j;
+              }
+          }
+          swap(minPos,i);
+      }
+    }
+
+    private void swap(int m, int n) {
+        int tmp=items[m];
+        items[m]=items[n];
+        items[n]=tmp;
     }
 
 
