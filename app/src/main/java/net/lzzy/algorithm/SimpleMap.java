@@ -10,6 +10,33 @@ import java.util.List;
 public class SimpleMap {
     int vertexCount;
     List<Edge> edges=new ArrayList<>();
+    List<Integer> visited;
+
+    List<Edge> getConnectedEdges(int source){
+        List<Edge> result=new ArrayList<>();
+        for (Edge e:edges){
+            if (e.getSource()==source){
+                result.add(e);
+            }
+        }
+        return result;
+    }
+    private void iterateDepth(int v){
+        if (!visited.contains(v)){
+            visited.add(v);
+        }
+        if (visited.size()==vertexCount){
+            return;
+        }
+        List<Edge> vEdges=getConnectedEdges(v);
+        for (Edge edge:vEdges){
+            if (visited.contains(edge.getTarget())){
+                continue;
+            }
+            iterateDepth(edge.getTarget());
+        }
+    }
+
 
     public SimpleMap(int v){
         vertexCount=v;
@@ -22,7 +49,14 @@ public class SimpleMap {
         addEdge(v2,v1,d1);
     }
     public String iterateDepthFirst(){
-        return "015234";
+//        return "015234";
+        visited=new ArrayList<>();
+        iterateDepth(0);
+        StringBuilder result=new StringBuilder();
+        for(int v:visited ){
+            result.append(v).append(",");
+        }
+        return result.toString();
     }
     public String itereRangeFirst(){
         return "012354";
